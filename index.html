@@ -1,46 +1,23 @@
-<html>
-<script src='https://d3js.org/d3.v5.min.js'></script>
-<style> circle {fill: lightblue; stroke: black;} </style>
-<body onload='init()'>
-<svg width=300 height=300>
-</svg>
-<script>
-async function init() {
+<!DOCTYPE html>
+<html lang="en">
 
-data = await d3.csv('ds_salaries.csv');
-console.log(data)
+<head>
+    <meta charset="utf-8">
 
-// var width = 200;
-// var height = 200;
-// var margin = 50
-// var x = d3.scaleLog().domain([10,150]).range([0,width])
-// var y = d3.scaleLog().domain([10,150]).range([height, 0])
+    <!-- Load d3.js -->
+    <script src="https://d3js.org/d3.v6.js"></script>
+</head>
 
-// d3.select("svg")
-//   .append("g")
-//   .attr("transform", "translate("+margin+","+margin+")")
-// .selectAll("circle")
-// .data(data)
-// .enter()
-// .append("circle")
-// .attr("cx", function(d,i){return x(d.AverageCityMPG)})
-// .attr("cy", function(d,i){return y(d.AverageHighwayMPG)})
-// .attr("r", function(d,i){return 2 + Number.parseInt(d.EngineCylinders)});
+<body>
+    <!-- Create a div where the graph will take place -->
+    <div>
+        <label for="salary" >select minimum salary: </label>
+    </div>
+    <input type="range" min=0 max=600000 step=10000 id="salary" value=0 oninput="selected_salary.value = salary.value" style="width:80%">
+    <output name="selected_salary" id="selected_salary">0</output>
 
-// d3.select("svg").append("g")
-// .attr("transform","translate("+margin+","+margin+")")
-// .call(d3.axisLeft(y)
-// .tickValues([10, 20, 50, 100])
-// .tickFormat(d3.format("~s")));
-
-// d3.select("svg").append("g")
-// .attr("transform","translate("+margin+","+(height+margin)+")")
-// .call(d3.axisBottom(x)
-// .tickValues([10, 20, 50, 100])
-// .tickFormat(d3.format("~s")));
-
-
-}
-</script>
+    <div id="my_dataviz"></div>
+    <script src="barchart.js"></script>
 </body>
+
 </html>
