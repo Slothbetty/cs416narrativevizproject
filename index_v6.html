@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+
+    <!-- Load d3.js -->
+    <script src="https://d3js.org/d3.v6.js"></script>
+</head>
+
+<body>
+    <!-- Create a div where the graph will take place -->
+    <div>
+        <label for="salary" >select minimum salary: </label>
+    </div>
+    <input type="range" min=0 max=600000 step=10000 id="salary" value=0 oninput="selected_salary.value = salary.value" style="width:80%">
+    <output name="selected_salary" id="selected_salary">0</output>
+
+    <div id="my_dataviz"></div>
+    <script src="barchart.js"></script>
+</body>
+
+</html>
