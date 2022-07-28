@@ -2,8 +2,9 @@
 <html lang="en">
 
 <head>
+    <title>Data Visualization of the dataset of Data Scientist Salaries</title>
     <meta charset="utf-8">
-
+    
     <!-- Load d3.js -->
     <script src="https://d3js.org/d3.v4.js"></script>
     <style>
@@ -21,6 +22,7 @@
 </head>
 
 <body>
+    <h1>Data Visualization of the dataset of Data Scientist Salaries</h1>
     <!-- Create a div where the graph will take place -->
     <div>
         <label for="salary">select minimum salary: </label>
@@ -29,8 +31,11 @@
         style="width:80%">
     <output name="selected_salary" id="selected_salary">0</output>
 
-    <div id="my_dataviz"></div>
-    <script src="barchart.js"></script>
+    <div style="border: black;">
+        <div id="my_dataviz"></div>
+        <script src="barchart.js"></script>
+    </div>
+    
 </body>
 
 </html>
