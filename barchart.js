@@ -1,5 +1,5 @@
 // set the dimensions and margins of the graph
-const margin = { top: 20, right: 30, bottom: 40, left: 45 },
+const margin = { top: 20, right: 30, bottom: 70, left: 70 },
     width = 750 - margin.left - margin.right,
     height = 300 - margin.top - margin.bottom;
 
@@ -11,16 +11,14 @@ const svg = d3.select("#my_dataviz")
     .append("g")
     .attr("transform", `translate(${margin.left}, ${margin.top})`);
 
-//color list:
-const colors = ['#e41a1c','#377eb8','#4daf4a', '#F17327', '#E551E8', '#CAD351', '#8E23A2', '#1AC6FC', '#EBA99A', '#09D4FA'];
 
-// Parse the Data
+//color list:
+const colors = ['#e41a1c', '#377eb8', '#4daf4a', '#F17327', '#E551E8', '#CAD351', '#8E23A2', '#1AC6FC', '#EBA99A', '#09D4FA'];
+
+// Parse the Data and Display the chart
 d3.csv("ds_salaries.csv", function (data) {
     console.log(data);
     console.log(typeof data);
-
-
-    draw(200000);
 
     function draw(min_salary) {
 
@@ -31,12 +29,12 @@ d3.csv("ds_salaries.csv", function (data) {
             const work_year = data[i]["work_year"]
             if (year_count_map.has(work_year)) {
                 year_total_count_map.set(work_year, year_total_count_map.get(work_year) + 1);
-                if (parseInt(data[i]["salary_in_usd"]) >= min_salary) {
+                if (parseInt(data[i]["salary_in_usd"]) >= min_salary * 1000) {
                     year_count_map.set(work_year, year_count_map.get(work_year) + 1);
                 }
             } else {
                 year_total_count_map.set(work_year, 1);
-                if (parseInt(data[i]["salary_in_usd"]) >= min_salary) {
+                if (parseInt(data[i]["salary_in_usd"]) >= min_salary * 1000) {
                     year_count_map.set(work_year, 1);
                 }
             }
@@ -73,16 +71,27 @@ d3.csv("ds_salaries.csv", function (data) {
         svg.append("g")
             .call(d3.axisLeft(y))
 
-        //Add tooltips
+        //Add Barchart labels to X and Y axis
+        svg.append("text")
+            .attr("transform", "rotate(-90)")
+            .attr("x", -(height / 2))
+            .attr("y", -40)
+            .style("text-anchor", "middle")
+            .text("Year");
+
+        svg.append("text")
+            .attr("x", width / 2)
+            .attr("y", 260)
+            .attr("text-anchor", "middle")
+            .style("font-size", "16px")
+            .text("Percentage");
+
+        //Initialize tooltip and colors
         var tooltip = d3.select("body").append("div").attr("class", "toolTip");
 
-        var subgroups = data.columns.slice(1);
-        console.log('subgroups:', subgroups);
-        console.log([...year_count_percentage_map.keys()]);
-
         var color = d3.scaleOrdinal()
-        .domain([...year_count_percentage_map.keys()])
-        .range(colors);
+            .domain([...year_count_percentage_map.keys()])
+            .range(colors);
 
         // variable u: map data to existing bars
         var u = svg.selectAll("rect")
@@ -97,7 +106,7 @@ d3.csv("ds_salaries.csv", function (data) {
             .attr("y", function (d) { return y(d.year); })
             .attr("width", function (d) { return x(d.count_percentage); })
             .attr("height", function (d) { return y.bandwidth(); })
-            .attr("fill", function(d) { return color(d.year); })
+            .attr("fill", function (d) { return color(d.year); })
             .on("mousemove", function (d) {
                 tooltip
                     .style("left", d3.event.pageX - 50 + "px")
@@ -107,12 +116,44 @@ d3.csv("ds_salaries.csv", function (data) {
             })
             .on("mouseout", function (d) { tooltip.style("display", "none"); });
 
+
+        // Add percentage text labels    
+        var label = svg.selectAll(".label").data(arr);
+
+        label.exit().remove();
+
+        label.enter().append("text").attr("class", "label");
+
+        label.text(function (d) { return d.count_percentage.toFixed(2) + "%"; })
+            .attr("x", function (d) { return 10; })
+            .attr("y", function (d) { return y(d.year) + y.bandwidth() / 2 + 10; })
+            .attr("font-family", "sans-serif")
+            .attr("font-size", "24px")
+            .attr("fill", "black");
+
     }
+
+    draw(0);
 
     var slider = d3.select('#salary');
     slider.on('change', function () {
         console.log(this.value);
         draw(this.value);
     });
+
+    //Timer for demo purpose:
+    let myVar = setInterval(myTimer, 2000);
+
+    function myTimer() {
+        //Initial updates and demo
+        var input_element = document.getElementById("salary");
+        input_element.value = 220;
+        var output_element = document.getElementById("selected_salary");
+        output_element.value = 220;
+        draw(220);
+        clearInterval(myVar);
+    }
+    
+    
 
 })

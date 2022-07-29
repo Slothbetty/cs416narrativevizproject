@@ -13,3 +13,9 @@
     border: 1px solid black;
     width: 750px;
 }
+
+.center {
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    }

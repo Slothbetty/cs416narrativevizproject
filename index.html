@@ -16,10 +16,14 @@
     <div>
         <label for="salary">select minimum salary in USD: </label>
     </div>
-    <input type="range" min=0 max=600000 step=10000 id="salary" value=300000 oninput="selected_salary.value = salary.value" >
-    <output name="selected_salary" id="selected_salary">300000</output>
+    <input type="range" min=0 max=600 step=10 id="salary" value=0 oninput="selected_salary.value = salary.value" >
+    <output name="selected_salary" id="selected_salary">0</output><span>K</span>
 
     <div id="my_dataviz" class="barchart_border">
+    <div class="center">
+        <h2> Years VS Percentage of People</h2>
+    </div>
+    
     <script src="barchart.js"></script>
     </div>
 </body>
