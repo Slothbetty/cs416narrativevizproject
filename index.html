@@ -7,35 +7,21 @@
     
     <!-- Load d3.js -->
     <script src="https://d3js.org/d3.v4.js"></script>
-    <style>
-    .toolTip {
-        position: absolute;
-      display: none;
-      min-width: 80px;
-      height: auto;
-      background: none repeat scroll 0 0 #ffffff;
-      border: 1px solid #6F257F;
-      padding: 14px;
-      text-align: center;
-    }
-    </style>
+    <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
     <h1>Data Visualization of the dataset of Data Scientist Salaries</h1>
     <!-- Create a div where the graph will take place -->
     <div>
-        <label for="salary">select minimum salary: </label>
+        <label for="salary">select minimum salary in USD: </label>
     </div>
-    <input type="range" min=0 max=600000 step=10000 id="salary" value=0 oninput="selected_salary.value = salary.value"
-        style="width:80%">
-    <output name="selected_salary" id="selected_salary">0</output>
+    <input type="range" min=0 max=600000 step=10000 id="salary" value=300000 oninput="selected_salary.value = salary.value" >
+    <output name="selected_salary" id="selected_salary">300000</output>
 
-    <div style="border: black;">
-        <div id="my_dataviz"></div>
-        <script src="barchart.js"></script>
+    <div id="my_dataviz" class="barchart_border">
+    <script src="barchart.js"></script>
     </div>
-    
 </body>
 
 </html>
