@@ -1,5 +1,5 @@
 // set the dimensions and margins of the graph
-const margin = { top: 20, right: 30, bottom: 70, left: 70 },
+const margin = { top: 20, right: 100, bottom: 70, left: 70 },
     width = 750 - margin.left - margin.right,
     height = 300 - margin.top - margin.bottom;
 
@@ -125,7 +125,7 @@ d3.csv("ds_salaries.csv", function (data) {
         label.enter().append("text").attr("class", "label");
 
         label.text(function (d) { return d.count_percentage.toFixed(2) + "%"; })
-            .attr("x", function (d) { return 10; })
+            .attr("x", function (d) { return x(d.count_percentage); })
             .attr("y", function (d) { return y(d.year) + y.bandwidth() / 2 + 10; })
             .attr("font-family", "sans-serif")
             .attr("font-size", "24px")
@@ -147,10 +147,10 @@ d3.csv("ds_salaries.csv", function (data) {
     function myTimer() {
         //Initial updates and demo
         var input_element = document.getElementById("salary");
-        input_element.value = 220;
+        input_element.value = 100;
         var output_element = document.getElementById("selected_salary");
-        output_element.value = 220;
-        draw(220);
+        output_element.value = 100;
+        draw(100);
         clearInterval(myVar);
     }
     
