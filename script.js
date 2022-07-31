@@ -27,7 +27,7 @@ const experience_svg = d3.select("#experience")
     .append("svg")
     // Responsive SVG needs these 2 attributes and no width and height attr.
     .attr("preserveAspectRatio", "xMinYMin meet")
-    .attr("viewBox", "0 0 1200 300")
+    .attr("viewBox", "0 0 1200 400")
     .append("g")
     .attr("transform", `translate(${experience_margin.left}, ${experience_margin.top})`);
 
@@ -161,6 +161,8 @@ d3.csv("processed_ds_salaries.csv", function (data) {
             .attr("font-size", "18px")
             .attr("fill", "black");
 
+        add_annotations(min_salary, "year");
+
     }
 
 
@@ -270,6 +272,7 @@ d3.csv("processed_ds_salaries.csv", function (data) {
             .attr("font-family", "sans-serif")
             .attr("font-size", "18px")
             .attr("fill", "black");
+        add_annotations(min_salary, "experience");
 
     }
 
@@ -286,10 +289,10 @@ d3.csv("processed_ds_salaries.csv", function (data) {
                     country_count_map.set(country, 1);
                 }
             }
-            if(!country_count_map.has(country)){
+            if (!country_count_map.has(country)) {
                 country_count_map.set(country, 0);
             }
-            
+
         }
 
         const arr = Array.from(country_count_map, ([key, value]) => {
@@ -363,42 +366,176 @@ d3.csv("processed_ds_salaries.csv", function (data) {
             })
             .on("mouseout", function (d) { tooltip.style("display", "none"); });
 
+        add_annotations(min_salary, "country");
+
+    }
+
+
+    // Introduction
+    const btn = document.querySelector("button");
+    btn.addEventListener("click", introduction);
+    var clicktimes = 0;
+    function introduction() {
+        var intro = document.getElementById("intro");
+        var slider = document.getElementById("slider");
+        var year = document.getElementById("year");
+        var experience = document.getElementById("experience");
+        var country = document.getElementById("country");
+        var input_element = document.getElementById("salary");
+        var output_element = document.getElementById("selected_salary");
+
+        if (clicktimes == 0) {
+            slider.style.border = "2px red solid";
+            intro.innerHTML = "This is the slider bar which is the only parameter could be motified in the page."
+                + "<br>You could select the minimum data science salaries as your wish to see the different reaction of the charts below.";
+            clicktimes++;
+        } else if (clicktimes == 1) {
+            slider.style.border = "";
+            year.style.border = "2px red solid";
+            intro.innerHTML = "This is Year vs Percentage of People chart."
+                + "<br>It's mainly showing the percentage of people whose salaries are more than or equal to selected minimum data science salaries in the slider bar in different years.";
+            clicktimes++;
+        } else if (clicktimes == 2) {
+            year.style.border = "";
+            experience.style.border = "2px red solid";
+            intro.innerHTML = "This is Experience Level vs Percentage of People chart."
+                + "<br>It's mainly showing the percentage of people whose salaries are more than or equal to selected minimum data science salaries in the slider bar in different experience levels.";
+            clicktimes++;
+        } else if (clicktimes == 3) {
+            experience.style.border = "";
+            country.style.border = "2px red solid";
+            intro.innerHTML = "This is Count of People VS Country chart."
+                + "<br>It's mainly showing the amount of people whose salaries are more than or equal to selected minimum data science salaries in the slider bar in different countries.";
+            clicktimes++;
+        } else if (clicktimes == 4) {
+            country.style.border = "";
+            intro.innerHTML = "Next I will show you three different scenes generated with charts below.";
+            clicktimes++;
+        } else if (clicktimes == 5) {
+            input_element.value = 0;
+            output_element.value = 0;
+            draw_year(0);
+            draw_country(0);
+            draw_experience(0);
+            intro.innerHTML = "This is the first scene. "
+                + "<br>It shows charts with 0 USD as minimum salaries. "
+                + "Both Year vs Percentage of People and Experience Level vs Percentage of People charts are showing 100% in every categories. "
+                + "For Count of People vs Country chart, it is quite easy to find out US has the largest amount of people whose data science jobs' salaries are above 0 USD. "
+                + "In the Annotations below you could find more information.";
+            clicktimes++;
+        }
     }
 
     draw_year(0);
     draw_country(0);
     draw_experience(0);
 
-    //Add annotations:
-    // Features of the annotation
-    const annotations = [
-        {
-          note: {
-            label: "Here is the annotation label",
-            title: "Annotation title",
-            align: "middle",  // try right or left
-            wrap: 200,  // try something smaller to see text split in several lines
-            padding: 10   // More = text lower
-          },
-          color: ["red"],
-          x: 600,
-          y: 250,
-          dy: 40,
-          dx: 100
-        }
-      ]
-    
-    // Add annotation to the chart
-    const makeAnnotations = d3.annotation()
-        .annotations(annotations)
-    year_svg
-        .append("g")
-        .call(makeAnnotations)
-        .attr("id", "my_annotations")
-        .attr("font-size", "18px");
-    
 
-    //remove annotations
-    // year_svg.selectAll("#my_annotations").remove()
+    function add_annotations(min_salary, type) {
+        if (type == "year") {
+            // remove annotations
+            year_svg.selectAll("#my_annotations").remove()
+            var year_label = "";
+            var year_title = "";
+            if (min_salary == 0) {
+                var year_title = "0K USD Year VS Percentage of People Chart:";
+                var year_label = "The Percentage of people in every year is 100%.";
+            }
+            const year_annotations = [
+                {
+                    note: {
+                        label: year_label,
+                        title: year_title,
+                        align: "middle",  // try right or left
+                        wrap: 350,  // try something smaller to see text split in several lines
+                        padding: 10   // More = text lower
+                    },
+                    color: ["red"],
+                    x: 600,
+                    y: 250,
+                    dy: 40,
+                    dx: 100
+                }
+            ]
+            // Add annotation to the chart
+            const makeYearAnnotations = d3.annotation()
+                .annotations(year_annotations)
+            year_svg
+                .append("g")
+                .call(makeYearAnnotations)
+                .attr("id", "my_annotations")
+                .attr("font-size", "16px");
+        } else if (type == "experience") {
+            // remove annotations
+            experience_svg.selectAll("#my_annotations").remove()
+            var experience_label = "";
+            var experience_title = "";
+            if (min_salary == 0) {
+                var experience_title = "0K USD Experience Level VS Percentage of People Chart:";
+                var experience_label = "The Percentage of people in every experience level is 100%.";
+            }
+            const experience_annotations = [
+                {
+                    note: {
+                        label: experience_label,
+                        title: experience_title,
+                        align: "middle",  // try right or left
+                        wrap: 300,  // try something smaller to see text split in several lines
+                        padding: 10   // More = text lower
+                    },
+                    color: ["red"],
+                    x: 560,
+                    y: 250,
+                    dy: 40,
+                    dx: 150
+                }
+            ]
+            // Add annotation to the chart
+            const makeExperienceAnnotations = d3.annotation()
+                .annotations(experience_annotations)
+            experience_svg
+                .append("g")
+                .call(makeExperienceAnnotations)
+                .attr("id", "my_annotations_1")
+                .attr("font-size", "16px");
+        } else if (type == "country") {
+            // remove annotations
+            country_svg.selectAll("#my_annotations").remove()
+            var country_label = "";
+            var country_title = "";
+            if (min_salary == 0) {
+                var country_title = "0K USD Count of People vs Country Chart:";
+                var country_label = "United states has the most amount of people whose salaries are more than or equal to 0k, which are 355. "
+                    + "For more information, you could hover over the bar chart to see more details.";
+            }
+            const country_annotations = [
+                {
+                    note: {
+                        label: country_label,
+                        title: country_title,
+                        align: "middle",  // try right or left
+                        wrap: 350,  // try something smaller to see text split in several lines
+                        padding: 30   // More = text lower
+                    },
+                    color: ["red"],
+                    x: 2520,
+                    y: 710,
+                    dy: -400,
+                    dx: -400
+                }
+            ]
+            // Add annotation to the chart
+            const markCountryAnnotations = d3.annotation()
+                .annotations(country_annotations)
+            country_svg
+                .append("g")
+                .call(markCountryAnnotations)
+                .attr("id", "my_annotations")
+                .attr("font-size", "20px");
+        }
+
+
+    }
+
 
 })

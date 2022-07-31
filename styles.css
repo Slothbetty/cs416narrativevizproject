@@ -38,7 +38,7 @@
 .year-svg-container {
     display: inline-block;
     position: relative;
-    width: 49.8%;
+    width: 49.7%;
     /* padding-bottom: 100%; aspect ratio */
     vertical-align: top;
     overflow: hidden;
@@ -48,7 +48,7 @@
 .experience-svg-container {
     display: inline-block;
     position: relative;
-    width: 49.8%;
+    width: 49.7%;
     /* padding-bottom: 100%; aspect ratio */
     vertical-align: top;
     overflow: hidden;
@@ -72,11 +72,13 @@
 
 .slider-bar{
     margin-right:10px;
+    width:900px;
 }
 
 .introduction-dialog{
     border: solid black;
     background-color: yellow;
-    width:60%;
+    width:80%;
+    margin-bottom:10px;
 }
 
