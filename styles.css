@@ -11,6 +11,12 @@
 
 .year_border {
     /* border: 1px solid black; */
+    width: 40%;
+    display: inline-block;
+}
+
+.experience_border {
+    /* border: 1px solid black; */
     width: 49%;
     display: inline-block;
 }
@@ -28,6 +34,26 @@
     font-size: 18px;
 }
 
+
+.year-svg-container {
+    display: inline-block;
+    position: relative;
+    width: 49.8%;
+    /* padding-bottom: 100%; aspect ratio */
+    vertical-align: top;
+    overflow: hidden;
+}
+
+
+.experience-svg-container {
+    display: inline-block;
+    position: relative;
+    width: 49.8%;
+    /* padding-bottom: 100%; aspect ratio */
+    vertical-align: top;
+    overflow: hidden;
+}
+
 .country-svg-container {
     /* display: inline-block; */
     position: relative;
@@ -37,11 +63,20 @@
     overflow: hidden;
 }
 
-.year-svg-container {
-    display: inline-block;
+/* .visualization-header{
+    display:inline-block;
     position: relative;
-    width: 49.6%;
-    /* padding-bottom: 100%; aspect ratio */
-    vertical-align: top;
+    vertical-align: center;
     overflow: hidden;
+} */
+
+.slider-bar{
+    margin-right:10px;
 }
+
+.introduction-dialog{
+    border: solid black;
+    background-color: yellow;
+    width:60%;
+}
+
