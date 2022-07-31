@@ -61,16 +61,17 @@ d3.csv("ds_salaries.csv", function (data) {
         const year_count_percentage_map = new Map();
         for (let i = 0; i < data.length; i++) {
             const work_year = data[i]["work_year"]
-            if (year_count_map.has(work_year)) {
-                year_total_count_map.set(work_year, year_total_count_map.get(work_year) + 1);
-                if (parseInt(data[i]["salary_in_usd"]) >= min_salary * 1000) {
+            if (parseInt(data[i]["salary_in_usd"]) >= min_salary * 1000) {
+                if (year_count_map.has(work_year)) {
                     year_count_map.set(work_year, year_count_map.get(work_year) + 1);
-                }
-            } else {
-                year_total_count_map.set(work_year, 1);
-                if (parseInt(data[i]["salary_in_usd"]) >= min_salary * 1000) {
+                } else {
                     year_count_map.set(work_year, 1);
                 }
+            }
+            if (year_total_count_map.has(work_year)) {
+                year_total_count_map.set(work_year, year_total_count_map.get(work_year) + 1);
+            } else {
+                year_total_count_map.set(work_year, 1);
             }
         }
 
@@ -174,18 +175,20 @@ d3.csv("ds_salaries.csv", function (data) {
         const experience_count_map = new Map();
         const experience_total_count_map = new Map();
         const experience_count_percentage_map = new Map();
+
         for (let i = 0; i < data.length; i++) {
             const experience_level = data[i]["experience_level"]
-            if (experience_count_map.has(experience_level)) {
-                experience_total_count_map.set(experience_level, experience_total_count_map.get(experience_level) + 1);
-                if (parseInt(data[i]["salary_in_usd"]) >= min_salary * 1000) {
+            if (parseInt(data[i]["salary_in_usd"]) >= min_salary * 1000) {
+                if (experience_count_map.has(experience_level)) {
                     experience_count_map.set(experience_level, experience_count_map.get(experience_level) + 1);
-                }
-            } else {
-                experience_total_count_map.set(experience_level, 1);
-                if (parseInt(data[i]["salary_in_usd"]) >= min_salary * 1000) {
+                } else {
                     experience_count_map.set(experience_level, 1);
                 }
+            }
+            if (experience_total_count_map.has(experience_level)) {
+                experience_total_count_map.set(experience_level, experience_total_count_map.get(experience_level) + 1);
+            } else {
+                experience_total_count_map.set(experience_level, 1);
             }
         }
 
@@ -292,16 +295,17 @@ d3.csv("ds_salaries.csv", function (data) {
         const country_count_percentage_map = new Map();
         for (let i = 0; i < data.length; i++) {
             const company_location = data[i]["company_location"]
-            if (country_count_map.has(company_location)) {
-                country_total_count_map.set(company_location, country_total_count_map.get(company_location) + 1);
-                if (parseInt(data[i]["salary_in_usd"]) >= min_salary * 1000) {
+            if (parseInt(data[i]["salary_in_usd"]) >= min_salary * 1000) {
+                if (country_count_map.has(company_location)) {
                     country_count_map.set(company_location, country_count_map.get(company_location) + 1);
-                }
-            } else {
-                country_total_count_map.set(company_location, 1);
-                if (parseInt(data[i]["salary_in_usd"]) >= min_salary * 1000) {
+                } else {
                     country_count_map.set(company_location, 1);
                 }
+            }
+            if (country_total_count_map.has(company_location)) {
+                country_total_count_map.set(company_location, country_total_count_map.get(company_location) + 1);
+            } else {
+                country_total_count_map.set(company_location, 1);
             }
         }
 
