@@ -4,28 +4,39 @@
 <head>
     <title>Data Visualization of the dataset of Data Scientist Salaries Test</title>
     <meta charset="utf-8">
-    
+
     <!-- Load d3.js -->
     <script src="https://d3js.org/d3.v4.js"></script>
     <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
-    <h1>Data Visualization of the dataset of Data Scientist Salaries</h1>
+    <h2 class="center">Narrative Visualization of the Data Science Job Salaries Analysis(2020-2022)</h2>
     <!-- Create a div where the graph will take place -->
     <div>
-        <label for="salary">select minimum salary in USD: </label>
+        <label for="salary">Use the slider below to select minimum salary in USD: </label>
     </div>
-    <input type="range" min=0 max=600 step=10 id="salary" value=0 oninput="selected_salary.value = salary.value" >
+    <input type="range" min=0 max=600 step=10 id="salary" value=0 oninput="selected_salary.value = salary.value">
     <output name="selected_salary" id="selected_salary">0</output><span>K</span>
 
-    <div id="my_dataviz" class="barchart_border">
-    <div class="center">
-        <h2> Years VS Percentage of People</h2>
+    <div>
+        <div id="year" class="year_border">
+            <!-- <div class="center">
+                <h3> Year VS Percentage of People</h3>
+            </div> -->
+        </div>
+        <div id="experience" class="year_border">
+            <!-- <div class="center">
+                <h3> Year VS Percentage of People</h3>
+            </div> -->
+        </div>
+        <div id="country" class="country_border">
+            <!-- <div class="center">
+                <h3> Country VS Count of People</h3>
+            </div> -->
+        </div>
     </div>
-    
-    <script src="barchart.js"></script>
-    </div>
+    <script src="script.js"></script>
 </body>
 
 </html>

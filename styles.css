@@ -1,21 +1,47 @@
 .toolTip {
     position: absolute;
-  display: none;
-  min-width: 80px;
-  height: auto;
-  background: none repeat scroll 0 0 #ffffff;
-  border: 1px solid #6F257F;
-  padding: 14px;
-  text-align: center;
+    display: none;
+    min-width: 80px;
+    height: auto;
+    background: none repeat scroll 0 0 #ffffff;
+    border: 1px solid #6F257F;
+    padding: 14px;
+    text-align: center;
 }
 
-.barchart_border{
-    border: 1px solid black;
-    width: 800px;
+.year_border {
+    /* border: 1px solid black; */
+    width: 49%;
+    display: inline-block;
+}
+
+.country_border {
+    /* border: 1px solid black; */
+    width: 100%;
+    display: inline-block;
 }
 
 .center {
     text-align: center;
     display: flex;
     justify-content: center;
-    }
+    font-size: 18px;
+}
+
+.country-svg-container {
+    /* display: inline-block; */
+    position: relative;
+    width: 100%;
+    /* padding-bottom: 100%; aspect ratio */
+    vertical-align: top;
+    overflow: hidden;
+}
+
+.year-svg-container {
+    display: inline-block;
+    position: relative;
+    width: 49.6%;
+    /* padding-bottom: 100%; aspect ratio */
+    vertical-align: top;
+    overflow: hidden;
+}
