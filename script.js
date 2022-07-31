@@ -411,7 +411,7 @@ d3.csv("processed_ds_salaries.csv", function (data) {
             country.style.border = "";
             intro.innerHTML = "Next I will show you three different scenes generated with charts below.";
             clicktimes++;
-        } else if (clicktimes == 5) {
+        } else if (clicktimes == 5) { //first scene
             input_element.value = 0;
             output_element.value = 0;
             draw_year(0);
@@ -420,26 +420,55 @@ d3.csv("processed_ds_salaries.csv", function (data) {
             intro.innerHTML = "This is the first scene. "
                 + "<br>It shows charts with 0 USD as minimum salaries. "
                 + "Both Year vs Percentage of People and Experience Level vs Percentage of People charts are showing 100% in every categories. "
-                + "For Count of People vs Country chart, it is quite easy to find out US has the largest amount of people whose data science jobs' salaries are above 0 USD. "
+                + "In Count of People vs Country chart, it is quite easy to find out US has the largest amount of people whose data science jobs' salaries are above 0 USD. "
+                + "In the Annotations below you could find more information.";
+            clicktimes++;
+        } else if (clicktimes == 6) { //second scene
+            input_element.value = 190;
+            output_element.value = 190;
+            draw_year(190);
+            draw_country(190);
+            draw_experience(190);
+            intro.innerHTML = "This is the second scene. "
+                + "<br>It shows charts with 190K USD as minimum salaries. "
+                + "In Year vs Percentage of People chart, 2020 has more percentage of people whose salaries are above or equal to 190K USD than the other years. "
+                + "In Experience level vs Percentage of People chart, Executive-level / Director has more percentage of people whose salaries are above or equal to 190K USD than the other levels. "
+                + "In Count of People vs Country chart, United States has more people whose salaries are above or equal to 190K USD than the other countries. "
                 + "In the Annotations below you could find more information.";
             clicktimes++;
         }
     }
 
-    draw_year(0);
-    draw_country(0);
-    draw_experience(0);
+    draw_year(190);
+    draw_country(190);
+    draw_experience(190);
 
 
     function add_annotations(min_salary, type) {
         if (type == "year") {
             // remove annotations
             year_svg.selectAll("#my_annotations").remove()
-            var year_label = "";
-            var year_title = "";
+            var year_label, year_title = "";
+            var x, y, dy, dx, wrap, padding = 0;
             if (min_salary == 0) {
-                var year_title = "0K USD Year VS Percentage of People Chart:";
-                var year_label = "The Percentage of people in every year is 100%.";
+                year_title = "0K USD Year VS Percentage of People Chart:";
+                year_label = "The Percentage of people in every year is 100%.";
+                x = 600;
+                y = 250;
+                dy = 40;
+                dx = 100;
+                wrap = 400;
+                padding = 10;
+            } else if(min_salary > 0 && min_salary <= 210){
+                year_title = "0K to 210K USD Year VS Percentage of People Chart:";
+                year_label = "The Percentage of people in 2022 is always more than the other years, "
+                + "which indicates that it is easier to find a data science job with salaries above 0K to 210K in 2022.";
+                x = 0;
+                y = 35;
+                dy = 230;
+                dx = 200;
+                wrap = 400;
+                padding = 10;
             }
             const year_annotations = [
                 {
@@ -447,14 +476,14 @@ d3.csv("processed_ds_salaries.csv", function (data) {
                         label: year_label,
                         title: year_title,
                         align: "middle",  // try right or left
-                        wrap: 350,  // try something smaller to see text split in several lines
-                        padding: 10   // More = text lower
+                        wrap: wrap,  // try something smaller to see text split in several lines
+                        padding: padding  // More = text lower
                     },
                     color: ["red"],
-                    x: 600,
-                    y: 250,
-                    dy: 40,
-                    dx: 100
+                    x: x,
+                    y: y,
+                    dy: dy,
+                    dx: dx
                 }
             ]
             // Add annotation to the chart
@@ -468,11 +497,27 @@ d3.csv("processed_ds_salaries.csv", function (data) {
         } else if (type == "experience") {
             // remove annotations
             experience_svg.selectAll("#my_annotations").remove()
-            var experience_label = "";
-            var experience_title = "";
+            var experience_label, experience_title = "";
+            var x, y, dy, dx, wrap, padding = 0;
             if (min_salary == 0) {
-                var experience_title = "0K USD Experience Level VS Percentage of People Chart:";
-                var experience_label = "The Percentage of people in every experience level is 100%.";
+                experience_title = "0K USD Experience Level VS Percentage of People Chart:";
+                experience_label = "The Percentage of people in every experience level is 100%.";
+                x = 560;
+                y = 250;
+                dy = 40;
+                dx = 150;
+                wrap = 400;
+                padding = 10;
+            }else if(min_salary > 0 && min_salary <= 210){
+                experience_title = "0K to 210K USD Experience Level VS Percentage of People Chart:";
+                experience_label = "The Percentage of people in Executive-level / Director is always more than the other experience levels, "
+                + "which indicates that Executive-level / Director jobs are easier to achieve salaries above 0K to 210K";
+                x = 0;
+                y =180;
+                dy = 90;
+                dx = 230;
+                wrap = 460;
+                padding = 10;
             }
             const experience_annotations = [
                 {
@@ -480,14 +525,14 @@ d3.csv("processed_ds_salaries.csv", function (data) {
                         label: experience_label,
                         title: experience_title,
                         align: "middle",  // try right or left
-                        wrap: 300,  // try something smaller to see text split in several lines
-                        padding: 10   // More = text lower
+                        wrap: wrap,  // try something smaller to see text split in several lines
+                        padding: padding   // More = text lower
                     },
                     color: ["red"],
-                    x: 560,
-                    y: 250,
-                    dy: 40,
-                    dx: 150
+                    x: x,
+                    y: y,
+                    dy: dy,
+                    dx: dx
                 }
             ]
             // Add annotation to the chart
@@ -496,17 +541,33 @@ d3.csv("processed_ds_salaries.csv", function (data) {
             experience_svg
                 .append("g")
                 .call(makeExperienceAnnotations)
-                .attr("id", "my_annotations_1")
+                .attr("id", "my_annotations")
                 .attr("font-size", "16px");
         } else if (type == "country") {
             // remove annotations
             country_svg.selectAll("#my_annotations").remove()
-            var country_label = "";
-            var country_title = "";
+            var country_label, country_title = "";
+            var x, y, dy, dx, wrap, padding = 0;
             if (min_salary == 0) {
-                var country_title = "0K USD Count of People vs Country Chart:";
-                var country_label = "United states has the most amount of people whose salaries are more than or equal to 0k, which are 355. "
+                country_title = "0K USD Count of People VS Country Chart:";
+                country_label = "United states has the most amount of people whose salaries are more than or equal to 0k, which are 355. "
                     + "For more information, you could hover over the bar chart to see more details.";
+                x = 2520;
+                y = 710;
+                dy = -400;
+                dx = -400;
+                wrap = 350;
+                padding = 20;
+            }else if(min_salary > 0 && min_salary <= 210){
+                country_title = "0K to 210K USD Count of People VS Country chart:";
+                country_label = "United States always has more people whose salaries are more than or equal to 0K to 210K USD, "
+                + "which indicates that it is more easy to find a data science job in the United States to achieve salaries above 0K to 210K";
+                x = 2520;
+                y = 710;
+                dy = -400;
+                dx = -400;
+                wrap = 400;
+                padding = 20;
             }
             const country_annotations = [
                 {
@@ -514,14 +575,14 @@ d3.csv("processed_ds_salaries.csv", function (data) {
                         label: country_label,
                         title: country_title,
                         align: "middle",  // try right or left
-                        wrap: 350,  // try something smaller to see text split in several lines
-                        padding: 30   // More = text lower
+                        wrap: wrap,  // try something smaller to see text split in several lines
+                        padding: padding   // More = text lower
                     },
                     color: ["red"],
-                    x: 2520,
-                    y: 710,
-                    dy: -400,
-                    dx: -400
+                    x: x,
+                    y: y,
+                    dy: dy,
+                    dx: dx
                 }
             ]
             // Add annotation to the chart
@@ -533,9 +594,5 @@ d3.csv("processed_ds_salaries.csv", function (data) {
                 .attr("id", "my_annotations")
                 .attr("font-size", "20px");
         }
-
-
     }
-
-
 })
