@@ -150,7 +150,7 @@ d3.csv("processed_ds_salaries.csv", function (data) {
                     .style("left", d3.event.pageX - 50 + "px")
                     .style("top", d3.event.pageY - 70 + "px")
                     .style("display", "inline-block")
-                    .html("Year: " + (d.year) + "<br>" + "Percentage of People: " + (d.count_percentage) + "%");
+                    .html("Year: " + (d.year) + "<br>" + "Percentage of People: " + (d.count_percentage.toFixed(1)) + "%");
             })
             .on("mouseout", function (d) { tooltip.style("display", "none"); });
 
@@ -272,7 +272,7 @@ d3.csv("processed_ds_salaries.csv", function (data) {
                     .style("left", d3.event.pageX - 50 + "px")
                     .style("top", d3.event.pageY - 70 + "px")
                     .style("display", "inline-block")
-                    .html("Experiance Level: " + (d.experience) + "<br>" + "Percentage of People: " + (d.count_percentage) + "%");
+                    .html("Experiance Level: " + (d.experience) + "<br>" + "Percentage of People: " + (d.count_percentage.toFixed(1)) + "%");
             })
             .on("mouseout", function (d) { tooltip.style("display", "none"); });
 
