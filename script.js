@@ -516,7 +516,7 @@ d3.csv("processed_ds_salaries.csv", function (data) {
             }else if(min_salary > 210){
                 year_title = "Above 210K USD Year VS Percentage of People Chart:";
                 year_label = "The Percentage of people in 2020 is always more than the other years, "
-                + "which indicates that a data science job in 2020 is easy to be above above 210K USD salary.";
+                + "which indicates that a data science job in 2020 is easy to be above 210K USD salary.";
                 x = 0;
                 y = 170;
                 dy = 90;
