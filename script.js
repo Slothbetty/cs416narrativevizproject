@@ -406,8 +406,7 @@ d3.csv("processed_ds_salaries.csv", function (data) {
         if (clicktimes == 0) {
             slider.style.border = "2px red solid";
             intro.innerHTML = "This is the slider bar which is the only parameter could be motified in the page."
-                + "<br>You could select the minimum data science salaries as your wish to see the different reaction of the charts below."
-                + "<br><b>NOTICE: For demo purpose, I disabled the slider bar during introduction process to prevent confusion.</b>";
+                + "<br>You could select the minimum data science salaries as your wish to see the different reaction of the charts below.";
             btn.innerHTML = "Next";
             clicktimes++;
 
@@ -669,6 +668,8 @@ d3.csv("processed_ds_salaries.csv", function (data) {
         }
     }
 
+    var slider = document.getElementById("salary");
+    slider.disabled = true;
     draw_year(0);
     draw_country(0);
     draw_experience(0);
