@@ -456,7 +456,7 @@ d3.csv("processed_ds_salaries.csv", function (data) {
                 + "<br>In Year vs Percentage of People chart, 2022 has more percentage of people whose salaries are above or equal to 190K USD than the other years. "
                 + "<br>In Experience level vs Percentage of People chart, Executive-level / Director has more percentage of people whose salaries are above or equal to 190K USD than the other levels. "
                 + "<br>In Count of People vs Country chart, United States has more people whose salaries are above or equal to 190K USD than the other countries. "
-                + "<br>Therefore, an Executive-level / Director level job in the United States in 2022 is easier to achieve above 190K USD salary. "
+                + "<br>Therefore, an Executive-level / Director level job in the United States in 2022 is easier to achieve above 190K USD salaries,  "
                 + "<br>You could find more information in the annotations below.";
             clicktimes++;
         }else if (clicktimes == 7) { //third scene
