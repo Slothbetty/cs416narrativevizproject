@@ -456,7 +456,7 @@ d3.csv("processed_ds_salaries.csv", function (data) {
                 + "<br>In Year vs Percentage of People chart, 2022 has more percentage of people whose salaries are above or equal to 190K USD than the other years. "
                 + "<br>In Experience level vs Percentage of People chart, Executive-level / Director has more percentage of people whose salaries are above or equal to 190K USD than the other levels. "
                 + "<br>In Count of People vs Country chart, United States has more people whose salaries are above or equal to 190K USD than the other countries. "
-                + "<br>Therefore, to find a job above 190K USD salaries, an Executive-level / Director level job in the United States in 2022 is easier to achieve the goal. "
+                + "<br>Therefore, an Executive-level / Director level job in the United States in 2022 is easier to achieve above 190K USD salary. "
                 + "<br>You could find more information in the annotations below.";
             clicktimes++;
         }else if (clicktimes == 7) { //third scene
@@ -470,7 +470,7 @@ d3.csv("processed_ds_salaries.csv", function (data) {
                 + "<br>Different from previous scene, in Year vs Percentage of People chart, 2020 has more percentage of people whose salaries are above or equal to 300K USD than the other years. "
                 + "<br>In Experience level vs Percentage of People chart, Executive-level / Director still has more percentage of people whose salaries are above or equal to 300K USD than the other levels. "
                 + "<br>In Count of People vs Country chart, United States is the only country has jobs which salaries are above or equal to 300K USD. "
-                + "<br>Therefore, to find a job above 300K USD salaries, an Executive-level / Director level job in the United States in 2020 is easier to achieve the goal. "
+                + "<br>Therefore, an Executive-level / Director level job in the United States in 2020 is easier to achieve above 300K USD salary. "
                 + "<br>You could find more information in the annotations below.";
             clicktimes++;
         }else if (clicktimes == 8) {
@@ -506,7 +506,7 @@ d3.csv("processed_ds_salaries.csv", function (data) {
             } else if(min_salary > 0 && min_salary <= 210){
                 year_title = "0K to 210K USD Year VS Percentage of People Chart:";
                 year_label = "The Percentage of people in 2022 is always more than the other years, "
-                + "which indicates that it is easier to find a data science job with salaries above 0K to 210K USD in 2022.";
+                + "which indicates that a data science job in 2022 is easy to be above 0K to 210K USD salary.";
                 x = 0;
                 y = 35;
                 dy = 230;
@@ -516,7 +516,7 @@ d3.csv("processed_ds_salaries.csv", function (data) {
             }else if(min_salary > 210){
                 year_title = "Above 210K USD Year VS Percentage of People Chart:";
                 year_label = "The Percentage of people in 2020 is always more than the other years, "
-                + "which indicates that it is easier to find a data science job with salaries above 210K USD in 2020.";
+                + "which indicates that a data science job in 2020 is easy to be above above 210K USD salary.";
                 x = 0;
                 y = 170;
                 dy = 90;
@@ -625,7 +625,7 @@ d3.csv("processed_ds_salaries.csv", function (data) {
             }else if(min_salary > 0 && min_salary <= 210){
                 country_title = "0K to 210K USD Count of People VS Country chart:";
                 country_label = "United States always has more people whose salaries are more than or equal to 0K to 210K USD than the other countries, "
-                + "which indicates that it is more easy to find a data science job in the United States to achieve salaries above 0K to 210K USD";
+                + "which indicates that a data science job in the United States is easy to achieve salaries above 0K to 210K USD";
                 x = 2520;
                 y = 710;
                 dy = -400;
@@ -635,7 +635,7 @@ d3.csv("processed_ds_salaries.csv", function (data) {
             }else if(min_salary > 210){
                 country_title = "Above 210K USD Count of People VS Country chart:";
                 country_label = "United States always has more people whose salaries are more than 210K USD than the other countries,"
-                + "which indicates that it is more easy to find a data science job in the United States to achieve salaries above 210K USD";
+                + "which indicates that a data science job in the United States is easy to achieve salaries above 210K USD";
                 x = 2520;
                 y = 710;
                 dy = -400;
