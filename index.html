@@ -16,15 +16,15 @@
     <div class="introduction-dialog">
         <p id="intro"> Welcome to Narrative Visualization of the Data Science Job Salaries Analysis(2020-2022). 
             This is the introduction windows of the whole Narrative Visualization. 
-            <br>You could click on "Next" button below to go through the introduction part and four main scenes.</p>
-        <button type="button" onclick="introduction()">Next</button>
+            <br>You could click on "Next" button below to go through the introduction part and three main scenes.</p>
+        <button id="btn_name" type="button" onclick="introduction()">Next</button>
     </div>
     <!-- Create a div where the graph will take place -->
     <div id="slider" class="slider-bar">
         <div>
             <label for="salary">Use the slider below to select minimum salary in USD, to see how people related data varied by years/experience level/countries: </label>
         </div>
-        <input type="range" min=0 max=600 step=10 id="salary" value=0 oninput="selected_salary.value = salary.value">
+        <input type="range" min=0 max=450 step=10 id="salary" value=0 oninput="selected_salary.value = salary.value">
         <output name="selected_salary" id="selected_salary">0</output><span>K</span>
     </div>
         <div id="year" class="year_border"></div>
