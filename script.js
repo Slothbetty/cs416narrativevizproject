@@ -474,6 +474,8 @@ d3.csv("processed_ds_salaries.csv", function (data) {
                 + "<br>You could find more information in the annotations below.";
             clicktimes++;
         }else if (clicktimes == 8) {
+            input_element.value = 0;
+            output_element.value = 0;
             draw_year(0);
             draw_country(0);
             draw_experience(0);
